@@ -12,8 +12,11 @@
 </center>
 
 
-
 ## Tracking performance
+Hybrid SORT
+<img src="assets/baseline.gif" alt="demo" style="zoom:34%;" />
+DS SORT
+<img src="assets/.gif" alt="ds-demo" style="zoom:34%;" />
 
 ### Results on DanceTrack test set
 
@@ -62,27 +65,27 @@ python3 tools/demo_ds.py     --demo_type image     -f exps/example/mot/yolox_dan
 python3 tools/demo_ds.py     --demo_type image     -f exps/example/mot/yolox_dancetrack_test_hybrid_sort.py     -c pretrained/ocsort_dance_model.pth.tar     --path ./datasets/dancetrack/test/dancetrack0054/img1     --fp16     --fuse     --save_result     --with_depth     --depth_encoder vitl     --depth_input_size 518     --depth_weights checkpoints/depth_anything_v2_vitl.pth     --save_depth     --visualize_depth --with_sam
 ```
 ## 評価 
-### MOT17
+```
+#MOT17
 python3 tools/run_dc.py     -f exps/example/mot/yolox_x_ablation_hybrid_sort.py     -b 1     -d 1     --fp16     --fuse     --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth
 
 python3 tools/run_dc.py -f exps/example/mot/yolox_x_mix_det_hybrid_sort.py -b 1 -d 1 --fuse --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth
 
-### Dance Track
+#Dance Track
 python3 tools/run_dc.py     -f exps/example/mot/yolox_dancetrack_val_hybrid_sort.py     -b 1     -d 1     --fp16     --fuse     --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth
 
 python3 tools/run_dc.py --test -f exps/example/mot/yolox_dancetrack_test_hybrid_sort.py -b 1 -d 1 --fp16 --fuse --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth
 
 
-### MOT17
+#MOT17
 python3 tools/run_ds.py     -f exps/example/mot/yolox_x_ablation_hybrid_sort.py     -b 1     -d 1     --fp16     --fuse     --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth  --with_sam
 
 python3 tools/run_ds.py -f exps/example/mot/yolox_x_mix_det_hybrid_sort.py -b 1 -d 1 --fuse --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth  --with_sam
 
-### Dance Track
+#Dance Track
 python3 tools/run_ds.py     -f exps/example/mot/yolox_dancetrack_val_hybrid_sort.py     -b 1     -d 1     --fp16     --fuse     --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth  --with_sam
 
 python3 tools/run_ds.py --test -f exps/example/mot/yolox_dancetrack_test_hybrid_sort.py -b 1 -d 1 --fp16 --fuse --expn $exp_name --with_depth --depth_encoder vitl --depth_input_size 518 --depth_weights checkpoints/depth_anything_v2_vitl.pth  --with_sam
+```
 
-
-<img src="assets/demo.gif" alt="demo" style="zoom:34%;" />
 

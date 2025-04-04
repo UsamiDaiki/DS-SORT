@@ -13,10 +13,10 @@
 
 
 ## Tracking performance
-Hybrid SORT
+Hybrid SORT  
 <img src="assets/baseline.gif" alt="demo" style="zoom:34%;" />
 
-DS SORT
+DS SORT  
 <img src="assets/ds-sort.gif" alt="demo" style="zoom:34%;" />
 
 ### Results on DanceTrack test set

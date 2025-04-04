@@ -15,8 +15,9 @@
 ## Tracking performance
 Hybrid SORT
 <img src="assets/baseline.gif" alt="demo" style="zoom:34%;" />
+
 DS SORT
-<img src="assets/.gif" alt="ds-demo" style="zoom:34%;" />
+<img src="assets/ds-sort.gif" alt="demo" style="zoom:34%;" />
 
 ### Results on DanceTrack test set
 

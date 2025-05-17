@@ -2,7 +2,7 @@
 
 
 
-> [**ssii2025投稿論文はこちら**](./usami.daiki_ssii2025.pdf)
+> ssii2025インタラクティブセッション採択
 > 
 
 ### Pipeline

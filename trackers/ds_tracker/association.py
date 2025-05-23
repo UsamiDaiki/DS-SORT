@@ -746,26 +746,12 @@ def associate_4_points_with_score_with_depth(
     #depth_cost = depth_cost / (np.max(depth_cost) + 1e-6)  # [0, 1]に正規化
     if depth_cost.size > 0:
         depth_cost = depth_cost / (np.max(depth_cost) + 1e-6)
+        #深度-1の場合深度コスト適応しない
+        mask_invalid = (det_depths[:, np.newaxis] == -1) | (trk_depths[np.newaxis, :] == -1)
+        depth_cost[mask_invalid] = 0.0                     # 無視＝ペナルティなし
     else:
         # ココが肝。要素数 0 のときは「すべて 0.0」の行列に置き換える。
         depth_cost = np.zeros_like(depth_cost)
-    """
-    if depth_cost.size > 0:
-        depth_cost = depth_cost / (np.max(depth_cost) + 1e-6)
-    else:
-        # ココが肝。要素数 0 のときは「すべて 0.0」の行列に置き換える。
-        depth_cost = np.zeros_like(depth_cost)
-
-     # ---- ここに下記のようなロジックを追加する ----
-    for i in range(len(det_depths)):
-        for j in range(len(trk_depths)):
-            # どちらかが 0 ならコストを 0 にする
-            # => 「深度コストを全く加えない」扱い
-            if det_depths[i] == 0 or trk_depths[j] == 0:
-                depth_cost[i, j] = 0.0  # あるいは None、-1 などでもOK
-    # ----------------------------------------------
-    いらない説が出てきた ご割り当ての原因になっていそう(dance0018 370~frame などの深度を利用した再割り当ての邪魔になっている)
-    """
 
     # 深度コストを総コストに統合
     depth_weight = getattr(args, 'depth_weight', 0.5)  # デフォルト値を設定

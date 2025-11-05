@@ -746,17 +746,20 @@ def associate_4_points_with_score_with_depth(
     #depth_cost = depth_cost / (np.max(depth_cost) + 1e-6)  # [0, 1]に正規化
     if depth_cost.size > 0:
         depth_cost = depth_cost / (np.max(depth_cost) + 1e-6)
-        #深度-1の場合深度コスト適応しない
+       ###深度-1の場合深度コスト適応しない
         mask_invalid = (det_depths[:, np.newaxis] == -1) | (trk_depths[np.newaxis, :] == -1)
-        depth_cost[mask_invalid] = 0.0                     # 無視＝ペナルティなし
+        depth_cost[mask_invalid] = 0.0                     # 無視＝ペナルティなし 
     else:
         # ココが肝。要素数 0 のときは「すべて 0.0」の行列に置き換える。
         depth_cost = np.zeros_like(depth_cost)
 
+
     # 深度コストを総コストに統合
     depth_weight = getattr(args, 'depth_weight', 0.5)  # デフォルト値を設定
     total_cost_no_depth = -(iou_matrix + angle_diff_cost - score_dif * args.TCM_first_step_weight)
-    
+    #print("depth_cost")
+    #print(depth_cost)
+
     print("total_cost_no_depth")
     print(total_cost_no_depth)
 

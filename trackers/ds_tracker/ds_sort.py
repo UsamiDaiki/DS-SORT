@@ -193,18 +193,25 @@ class KalmanBoxTracker(object):
         if bbox is not None:
             ##深度の追加
             if depth_value is not None and depth_value != -1:
-                ## 信頼度が0.7以上の場合のみ深度値を保存
-                #confidence = bbox[-1]
-                #if confidence >= 0.7:
-                self.current_depth = depth_value
-                self.depth_history.append(depth_value)
-                #if self.current_depth is None:
-                #    self.current_depth = depth_value
-                #    self.depth_history.append(depth_value)   
+                
+                # --- 深度スパイク判定：ratio filter (depth / prev <= 1.2 なら更新) -------------
+                
+                if self.current_depth is None:
+                    # 初回はそのまま採用
+                    self.current_depth = depth_value
+                    self.depth_history.append(depth_value)
+                else:
+                    ratio = depth_value / (self.current_depth + 1e-6)
+                    if ratio <= 1.2:
+                        # 急激すぎない → 生値をそのまま更新
+                        self.current_depth = depth_value
+                        self.depth_history.append(depth_value)
+                    else:
+                        self.current_depth = depth_value*0.8
+                        self.depth_history.append(depth_value*0.8)
+                
 
-                #if depth_value is not None:
-                #    self.current_depth = depth_value
-                #    self.depth_history.append(depth_value) 
+
 
             if self.last_observation.sum() >= 0:  # no previous observation
                 previous_box = None
